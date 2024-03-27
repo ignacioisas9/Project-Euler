@@ -13,40 +13,34 @@
 // NOTE: Once the chain starts the terms are allowed to go above one million.
 
 function longestChainUnder(number) {
-    let array = []
-    let steps = 0
+    // initialized array with values 0 and 1 (considering cases where no terms or only one)
+    let array = [0, 1]
+    // lets start at 2 because cases 0 and 1 are contemplated
     for (let i = 2; i <= number; i++) {
-        while (value !== 1){
-            if (isEven(i)) {
-                step++
-                i = valueIfEven(i)
-            }
-            if (isOdd(i) && i !== 1) {
-                step++
-                return valueIfOdd(i)
-            }
-            if (i === 1) {
-                array.push(steps)
-            }
+        let terms = 1
+        let value = i
+        while (value !== 1) {
+            terms = terms + 1
+            value = functionCollatz(value)
         }
+        array.push(terms)
+        steps = 0
     }
-    return Math.max(array)
+    const indexOfLargestValue = array.reduce(
+        (maxIndex, currentValue, currentIndex, array) => currentValue > array[maxIndex] ? currentIndex : maxIndex, 0
+    )
+    console.log(indexOfLargestValue)
+    return indexOfLargestValue
 }
 
-function isEven(number) {
-    return number % 2 === 0
+function functionCollatz(n) {
+    if (n % 2 === 0){
+        return n / 2
+    }
+    if (n % 2  !== 0) {
+        return 3 * n + 1
+    }
 }
 
-function valueIfEven(number) {
-    return number / 2
-}
-
-function isOdd(number) {
-    return number % 2  !== 0
-}
-
-function valueIfOdd(number) {
-    return 3 * number + 1
-}
 
 longestChainUnder(1000000)
