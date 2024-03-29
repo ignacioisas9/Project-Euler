@@ -33,15 +33,15 @@ def findMaximumTotal(arrayOfArrays):
     arr.insert(-1, 0)
     for i in range(len(res)):
         for j in range(len(arr)):
+            print(res)
             
-            
-    return max(arr)
+    return max(res)
 
 testTriangle = [
-    [3],                ## [20, 17, 19, 23, 16, 20, 22, 16]
-    [7, 4],             ## [17, 14, 16, 20, 13, 17, 19, 13]
-    [2, 4, 6],          ## [10, 7, 9, 13, 15, 9]
-    [8, 5, 9, 3],       ## [8, 5, 9, 3]
+    [3],
+    [7, 4],
+    [2, 4, 6],
+    [8, 5, 9, 3],
 ]
 
 triangle = [
