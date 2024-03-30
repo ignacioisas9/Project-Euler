@@ -25,17 +25,12 @@
 # However, Problem 67, is the same challenge with a triangle containing one-hundred rows; 
 # it cannot be solved by brute force, and requires a clever method! ;o)
 
-def findMaximumTotal(arrayOfArrays):
-    res = arrayOfArrays[::-1]
-    print(res)
-    arr = res[0]
-    arr.insert(0, 0)
-    arr.insert(-1, 0)
-    for i in range(len(res)):
-        for j in range(len(arr)):
-            print(res)
-            
-    return max(res)
+def findMaximumTotal(triangle):
+    for i in range(len(triangle) - 2, -1, -1):
+        for j in range(len(triangle[i])):
+            current = triangle[i][j]
+            triangle[i][j] = current + max(triangle[i + 1][j], triangle[i + 1][j + 1])
+    return triangle[0][0]
 
 testTriangle = [
     [3],
@@ -62,4 +57,4 @@ triangle = [
     [ 4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60,  4, 23]
 ]
 
-print(findMaximumTotal(testTriangle))
+print(findMaximumTotal(triangle))
