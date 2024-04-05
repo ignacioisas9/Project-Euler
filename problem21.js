@@ -5,18 +5,12 @@
 // Evaluate the sum of all the amicable numbers under 10000.
 
 function sumOfAmicableNumbersUnder(number) {
-    sumOfDivisors = []
-    array = []
-    sum = 0
+    let sum = 0
     for (let i = 1; i <= number; i++) {
-        temp = d(i)
-        sumOfDivisors.push(temp)
-    }
-    for (let i = 0; i < sumOfDivisors.length; i++) {
-        if (array.indexOf(sumOfDivisors[i]) === -1) {
-            array.push(sumOfDivisors[i])
-        } else {
-            sum += array.indexOf(sumOfDivisors[i]) + 1;
+        temp1 = d(i)
+        temp2 = d(temp1)
+        if (i === temp2 && i !== temp1){
+            sum += i
         }
     }
     return sum
@@ -24,13 +18,12 @@ function sumOfAmicableNumbersUnder(number) {
 
 function d(n) {
     let sum = 0
-    for (let i = 1; i <= n; i++) {
+    for (let i = 1; i <= Math.ceil(n / 2); i++) {
         if (n % i === 0) {
             sum += i
         }
     }
     return sum
 }
-
 
 console.log(sumOfAmicableNumbersUnder(10000))
