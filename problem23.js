@@ -8,36 +8,64 @@
 // that cannot be expressed as the sum of two abundant numbers is less than this limit.
 // Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
-const limit = 28123
+const limit = 28123;
 
 function sumOfNonAbundantSums(limit) {
     const abundantNumbers = findAbundantNumbers(limit);
+    const abundantSums = findAbundantSums(abundantNumbers);
 
-    // Implementation to find the sum of non-abundant sums
-    // This function would iterate over numbers and calculate the sum
+    let sum = 0;
+    for (let i = 1; i <= limit; i++) {
+        if (!abundantSums[i]) {
+            sum += i;
+        }
+    }
+    return sum;
 }
 
 function findAbundantNumbers(limit) {
-    let array = []
-    for (let i = 1; i < limit; i++) {
+    const abundantNumbers = [];
+    for (let i = 1; i <= limit; i++) {
         if (isAbundant(i)) {
-            array.push(i)
+            abundantNumbers.push(i);
         }
     }
+    return abundantNumbers;
 }
 
-function isAbundant(number){
-    return number < d(number)
+function isAbundant(number) {
+    return number < d(number);
 }
 
 function d(n) {
-    let sum = 0
-    for (let i = 1; i <= Math.ceil(n / 2); i++) {
+    let sum = 1;
+    const sqrtN = Math.sqrt(n);
+    for (let i = 2; i <= sqrtN; i++) {
         if (n % i === 0) {
-            sum += i
+            sum += i;
+            const divisor = n / i;
+            if (divisor !== i) {
+                sum += divisor;
+            }
         }
     }
-    return sum
+    return sum;
+}
+
+function findAbundantSums(abundantNumbers) {
+    const abundantSums = Array(limit + 1).fill(false);
+    const length = abundantNumbers.length;
+    for (let i = 0; i < length; i++) {
+        for (let j = i; j < length; j++) {
+            const sum = abundantNumbers[i] + abundantNumbers[j];
+            if (sum <= limit) {
+                abundantSums[sum] = true;
+            } else {
+                break;
+            }
+        }
+    }
+    return abundantSums;
 }
 
 console.log(sumOfNonAbundantSums(limit))
