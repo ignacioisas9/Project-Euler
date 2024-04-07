@@ -17,7 +17,6 @@ def longestRecurringCycle():
     max_d = 0
     for d in range(2, 1000):
         cycle_length = find_cycle_length(d)
-        print(cycle_length)
         if cycle_length > max_cycle_length:
             max_cycle_length = cycle_length
             max_d = d
