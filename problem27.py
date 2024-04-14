@@ -15,14 +15,23 @@ from math import sqrt
 from math import floor
 
 def findCoefficients():
-    a = -1000
-    b = -1000
-    return a, b
+    counters = []
+    for a in range(-1000, 1001):
+        for b in range(-1000, 1001):
+            n = 1
+            counter = 0
+            while isPrime(formula(a,b,n)):
+                counter = counter + 1
+                n = n + 1
+            counters.append(counter)
+    return (int(counters.index(max(counters)) / 2000) - 1000) * (counters.index(max(counters)) % 2000 - 1000)
 
 def formula(a, b, n):
     return pow(n, 2) + a * n + b
 
 def isPrime(number):
+    if number < 0:
+        return False
     if number == 2:
         return True
     if number % 2 == 0 or number == 1:
