@@ -16,6 +16,9 @@ from math import floor
 
 def findCoefficients():
     counters = []
+    maxa = -1000
+    maxb = -1000
+    maxcounter = 0
     for a in range(-1000, 1001):
         for b in range(-1000, 1001):
             n = 1
@@ -24,7 +27,11 @@ def findCoefficients():
                 counter = counter + 1
                 n = n + 1
             counters.append(counter)
-    return (int(counters.index(max(counters)) / 2000) - 1000) * (counters.index(max(counters)) % 2000 - 1000)
+            if counter > maxcounter:
+                maxcounter = counter
+                maxa = a
+                maxb = b
+    return maxa * maxb
 
 def formula(a, b, n):
     return pow(n, 2) + a * n + b
