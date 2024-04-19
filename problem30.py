@@ -10,7 +10,8 @@
 
 def sumOfFifthPowers():
     sum = 0
-    for number in range(10, 1000000):
+    max_num = 6 * 9 ** 5
+    for number in range(10, max_num):
         if number == getFifthPowerDigits(number):
             sum = sum + number
     return sum
